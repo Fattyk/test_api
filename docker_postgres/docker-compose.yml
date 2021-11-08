@@ -1,0 +1,20 @@
+version: '3'
+services: 
+  postgres:
+    image: fat_postgres
+    container_name: fat_postgres_container
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - '5000:5432'
+    volumes:
+      - .postgres:/data/postgress
+    networks:
+      - postgres
+    restart: always
+volumes:
+  postgres:
+networks:
+  postgres:
+    driver: bridge
