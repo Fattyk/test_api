@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)zs3ir%-j_m9t30f)r1#awh=e1^k2@-7y=(vtxt7!g)-f1&u+p'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'testapp1',
     'rest_framework',
     'debug_toolbar',
+    'django_seed'
 ]
 
 MIDDLEWARE = [
@@ -83,18 +85,18 @@ WSGI_APPLICATION = 'API_Test.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
     # 'default': {
-    #         'ENGINE': 'django.db.backends.postgresql',
-    #         'NAME': 'postgres',
-    #         'USER': 'postgres',
-    #         'PASSWORD': 'Ogundele3289@',
-    #         'HOST': 'localhost',
-    #         'PORT': '5432',
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
+    'default': {
+            'ENGINE': config('ENGINE'),
+            'NAME': config('NAME'),
+            'USER': config('USER'),
+            'PASSWORD': config('PASSWORD'),
+            'HOST': config('HOST'),
+            'PORT': config('PORT'),
+    }
     # 'default': {
     #         'ENGINE': 'django.db.backends.postgresql',
     #         'NAME': 'test_app',
